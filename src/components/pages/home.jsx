@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 
 import axios from "axios";
+import { CartContext } from "../../context/context";
 
 const Homepage = () => {
   const [data, setdata] = useState([]);
@@ -12,7 +13,12 @@ const Homepage = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  
+
+  const Globalstate = useContext(CartContext)
+  const dispatch = Globalstate.dispatch;
+  console.log(Globalstate)
+
+
   return (
     <div className="home">
       {data.map((item, index) => {
@@ -22,7 +28,7 @@ const Homepage = () => {
             <img src={item.image} alt="" />
             <p>{item.title}</p>
             <h3>$. {item.price}</h3>
-            <button >
+            <button onClick={()=>dispatch({type:'ADD', payload:item})}>
               add to cart
             </button>
           </div>

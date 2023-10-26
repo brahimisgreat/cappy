@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 
 import axios from "axios";
-import { CartContext } from "../../context/context";
+import { CartContext } from "../../../context/context";
 
-const Homepage = () => {
+const Home = () => {
   const [data, setdata] = useState([]);
   const fetchData = async () => {
     const response = await axios.get("https://fakestoreapi.com/products");
@@ -22,7 +22,7 @@ const Homepage = () => {
   return (
     <div className="home">
       {data.map((item, index) => {
-        
+       item.quantity=1 
         return (
           <div className="card" key={index}>
             <img src={item.image} alt="" />
@@ -38,4 +38,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default Home;

@@ -6,10 +6,14 @@ export default function Cart() {
   const Globalstate = useContext(CartContext);
   const state = Globalstate.state;
   const dispatch = Globalstate.dispatch;
+
+  const total = state.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
+
   return (
     <div>
-      {" "}
-      hello{" "}
+      hello
       {state.map((item, index) => {
         return (
           <div key={index}>
@@ -32,6 +36,9 @@ export default function Cart() {
           </div>
         );
       })}
+      {state.length>0 && <div>
+        <h2>{total}</h2>
+      </div>}
     </div>
   );
 }
